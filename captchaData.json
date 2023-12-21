@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "question": "What color is the sky on a clear day?",
+        "answer": "blue",
+        "hash": "hash_value_1",
+        "difficulty": 3
+    },
+    {
+        "id": 2,
+        "question": "What is 2 + 2?",
+        "answer": "4",
+        "hash": "hash_value_2",
+        "difficulty": 2
+    }
+]
