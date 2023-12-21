@@ -1,16 +1,37 @@
 [
     {
         "id": 1,
-        "question": "What color is the sky on a clear day?",
-        "answer": "blue",
-        "hash": "hash_value_1",
-        "difficulty": 3
+        "question": "What is the capital of France?",
+        "answer": "Paris",
+        "hash": "e8fc5b09e9e7b7ca2e85d13fa9b5c2e41d28f9c0db5f5e65af434a3c35d1c3f1",
+        "difficulty": 4
     },
     {
         "id": 2,
-        "question": "What is 2 + 2?",
-        "answer": "4",
-        "hash": "hash_value_2",
+        "question": "Which element's chemical symbol is O?",
+        "answer": "Oxygen",
+        "hash": "8b04d5e3775d298e78455efc5ca404d5a5b5a0bff4a572a2cebbe097c5f1b5c9",
+        "difficulty": 3
+    },
+    {
+        "id": 3,
+        "question": "What is 5 multiplied by 3?",
+        "answer": "15",
+        "hash": "df7e70e5021543fbae3d2fc4bf4596e9d278ea5e5a9c9e2c4b1e469e9b9b57e8",
         "difficulty": 2
+    },
+    {
+        "id": 4,
+        "question": "In which continent is the Amazon Rainforest located?",
+        "answer": "South America",
+        "hash": "75c5a3c0a7b5b5a8b4d049b50c8a2f3eb97b4b0b1297306b7d8c88b4f7fbd0c9",
+        "difficulty": 5
+    },
+    {
+        "id": 5,
+        "question": "Who wrote 'Hamlet'?",
+        "answer": "Shakespeare",
+        "hash": "62b5df392ccdfb04d3c14783e4aa7a1d7694b4e86f4f9b856a4ba0b1a6c4e104",
+        "difficulty": 6
     }
 ]

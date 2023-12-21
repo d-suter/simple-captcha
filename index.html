@@ -6,50 +6,54 @@
     <script>
         // Function to load a CAPTCHA question
         async function loadCaptcha() {
-            const response = await fetch('/captcha');
-            const data = await response.json();
-            document.getElementById('question').textContent = data.question;
-            document.getElementById('question').setAttribute('data-hash', data.hash);
+            try {
+                const response = await fetch('http://localhost:3000/captcha');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                document.getElementById('question').textContent = data.question;
+                document.getElementById('question').setAttribute('data-hash', data.hash);
+            } catch (error) {
+                console.error('Failed to load CAPTCHA:', error);
+            }
         }
 
         // Function to handle form submission
         async function submitAnswer(event) {
             event.preventDefault();
-            const question = document.getElementById('question').textContent;
-            const answer = document.getElementById('answer').value;
+            const answerInput = document.getElementById('answer');
+            const answer = encodeURIComponent(answerInput.value);
             const hash = document.getElementById('question').getAttribute('data-hash');
 
-            const response = await fetch('/captcha', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ hash, answer })
-            });
-            const result = await response.json();
+            try {
+                const response = await fetch(`http://localhost:3000/check-answer/${hash}/${answer}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
 
-            if (result.correct) {
-                alert('Correct answer!');
-                loadCaptcha();
-            } else {
-                if (result.attempts >= 3) {
-                    alert('Incorrect answer. Loading new CAPTCHA.');
-                    loadCaptcha();
+                if (result.answer) {
+                    alert('Correct answer!');
+                    answerInput.value = ''; // Clear the answer field
                 } else {
                     alert('Incorrect answer. Try again.');
                 }
+                loadCaptcha(); // Reload CAPTCHA regardless of the answer
+            } catch (error) {
+                console.error('Failed to submit CAPTCHA:', error);
             }
         }
 
         // Load the first CAPTCHA question when the page loads
-        window.onload = loadCaptcha;
+        window.addEventListener('load', loadCaptcha);
     </script>
 </head>
 <body>
     <h1>CAPTCHA Test</h1>
     <form onsubmit="submitAnswer(event)">
         <p id="question" data-hash="">Loading question...</p>
-        <input type="text" id="answer" placeholder="Enter your answer">
+        <input type="text" id="answer" placeholder="Enter your answer" required>
         <button type="submit">Submit Answer</button>
     </form>
 </body>
